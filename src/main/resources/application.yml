@@ -1,3 +1,9 @@
 spring:
     application:
         name: LooksForBooks
+
+    neo4j:
+        uri: bolt://localhost:7687
+        authentication:
+            username: ${DBUSER}
+            password: ${DBPSWD}

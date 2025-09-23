@@ -11,5 +11,5 @@ import org.springframework.data.neo4j.repository.Neo4jRepository;
  */
 public interface LibraryRepository extends Neo4jRepository<LibraryEntity, String> {
 
-    List<LibraryEntity> findByTitle(String name);
+    List<LibraryEntity> findByName(String name);
 }
