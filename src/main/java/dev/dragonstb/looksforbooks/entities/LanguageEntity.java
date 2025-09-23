@@ -2,6 +2,7 @@ package dev.dragonstb.looksforbooks.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
@@ -14,6 +15,10 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 @Node("Language")
 public class LanguageEntity {
 
+    @Id
+    @Property("code")
+    private final String code;
+
     @Property("name")
     private String name;
 
@@ -23,8 +28,13 @@ public class LanguageEntity {
     @Relationship(type="IN_LANGUAGE", direction=Relationship.Direction.INCOMING)
     private Set<BookEntity> ofBooks = new HashSet<>();
 
-    public LanguageEntity(String name) {
+    public LanguageEntity(String code, String name) {
+        this.code = code;
         this.name = name;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public String getName() {
@@ -51,5 +61,5 @@ public class LanguageEntity {
         this.ofBooks = ofBooks;
     }
 
-    
+
 }

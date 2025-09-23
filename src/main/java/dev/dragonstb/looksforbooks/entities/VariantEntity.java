@@ -2,6 +2,7 @@ package dev.dragonstb.looksforbooks.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
@@ -13,6 +14,10 @@ import org.springframework.data.neo4j.core.schema.Relationship;
  */
 @Node("Variant")
 public class VariantEntity {
+
+    @Id
+    @Property("id")
+    private final String id;
 
     @Property("title")
     private String title;
@@ -29,9 +34,14 @@ public class VariantEntity {
     @Relationship(type="HAS_VARIANT", direction=Relationship.Direction.INCOMING)
     private Set<BookEntity> ofBooks = new HashSet<>();
 
-    public VariantEntity(String title, int edition) {
+    public VariantEntity(String id, String title, int edition) {
+        this.id = id;
         this.title = title;
         this.edition = edition;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public String getTitle() {

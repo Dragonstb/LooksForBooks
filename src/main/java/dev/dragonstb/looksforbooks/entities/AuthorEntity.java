@@ -2,6 +2,8 @@ package dev.dragonstb.looksforbooks.entities;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
+import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
 import org.springframework.data.neo4j.core.schema.Relationship;
@@ -14,6 +16,10 @@ import org.springframework.data.neo4j.core.schema.Relationship;
 @Node("Author")
 public class AuthorEntity {
 
+    @Id
+    @Property("aid")
+    private final String aid;
+
     @Property("firstName")
     private String firstName;
 
@@ -23,9 +29,14 @@ public class AuthorEntity {
     @Relationship(type="AUTHOR_OF", direction=Relationship.Direction.OUTGOING)
     private Set<BookEntity> ofBooks = new HashSet<>();
 
-    public AuthorEntity(String firstName, String lastName) {
+    public AuthorEntity(String aid, String firstName, String lastName) {
+        this.aid = aid;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public String getAid() {
+        return aid;
     }
 
     public String getFirstName() {
@@ -52,5 +63,5 @@ public class AuthorEntity {
         this.ofBooks = ofBooks;
     }
 
-    
+
 }
