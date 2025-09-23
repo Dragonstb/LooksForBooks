@@ -7,3 +7,15 @@ spring:
         authentication:
             username: ${DBUSER}
             password: ${DBPSWD}
+
+management:
+    endpoints:
+        env:
+            enabled: true
+        mappings:
+            enabled: true
+        metrics:
+            enabled: true
+        web:
+            exposure:
+                include: health, env, mappings, metrics
