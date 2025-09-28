@@ -2,7 +2,6 @@ package dev.dragonstb.looksforbooks.entities;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 import org.springframework.data.neo4j.core.schema.Id;
 import org.springframework.data.neo4j.core.schema.Node;
 import org.springframework.data.neo4j.core.schema.Property;
