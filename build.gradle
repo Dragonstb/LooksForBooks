@@ -30,6 +30,7 @@ dependencies {
 
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // testImplementation 'org.neo4j.test:neo4j-harness:2025.09.0'
 	// testImplementation 'io.projectreactor:reactor-test'
 	// testImplementation 'org.springframework.security:spring-security-test'
 }

@@ -3,8 +3,6 @@ package dev.dragonstb.looksforbooks;
 import dev.dragonstb.looksforbooks.projections.AuthorProjection;
 import dev.dragonstb.looksforbooks.repositories.AuthorRepository;
 import java.util.List;
-import org.neo4j.cypherdsl.core.Cypher;
-import org.neo4j.cypherdsl.core.Node;
 import org.neo4j.cypherdsl.core.Statement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,17 +29,10 @@ public class RestApiController {
 
     @GetMapping("/authors-with-cdsl")
     public List<AuthorProjection> getAllAuthorsWithCypherDSL() {
-        List<AuthorProjection> authors = authorRepository.findAll(getAllAuthorsButNamesOnly(), AuthorProjection.class)
+        Statement statement = CypherDslStatements.getAllAuthorsButNamesOnly();
+        List<AuthorProjection> authors = authorRepository.findAll( statement, AuthorProjection.class )
                 .stream().toList();
         return authors;
     }
 
-    static Statement getAllAuthorsButNamesOnly() {
-        Node author = Cypher.node("Author").named("a");
-        return Cypher.match(author)
-                .returning(
-                        author.property("firstName").as("firstName"),
-                        author.property("lastName").as("lastName")
-                ).build();
-    }
 }
