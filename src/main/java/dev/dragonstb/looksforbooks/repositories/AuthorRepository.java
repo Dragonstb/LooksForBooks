@@ -3,6 +3,8 @@ package dev.dragonstb.looksforbooks.repositories;
 import dev.dragonstb.looksforbooks.entities.AuthorEntity;
 import dev.dragonstb.looksforbooks.projections.AuthorProjection;
 import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
 import org.springframework.data.neo4j.repository.support.CypherdslStatementExecutor;
@@ -20,4 +22,9 @@ public interface AuthorRepository extends Neo4jRepository<AuthorEntity, String>,
 
     @Query("MATCH (a:Author) RETURN a.firstName AS firstName, a.lastName AS lastName")
     List<AuthorProjection> getAllNamesOnly();
+
+    @Query(value = "MATCH (a:Author) RETURN a.firstName AS firstName, a.lastName AS lastName"
+            + " ORDER BY lastName, firstName ASC SKIP $skip LIMIT $limit",
+            countQuery = "MATCH (a:Author) RETURN count(a)")
+    Page<AuthorProjection> getAllNamesOnly(Pageable pageable);
 }

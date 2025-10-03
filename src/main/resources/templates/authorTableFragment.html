@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <link rel="stylesheet" href="../static/css/general.css" th:href="@{/css/general.css}"/>
+    </head>
+    <body>
+        <div th:fragment="authorTable">
+            <table>
+                <caption>List of authors, entries <span th:text="${fromEntry}">1</span> to <span th:text="${toEntry}">3</span> out of <span th:text="${page.totalElements}">3</span></caption>
+                <thead>
+                    <tr>
+                        <th scope="col">First Name</th>
+                        <th scope="col">Last Name</th>
+                    </tr>
+                </thead>
+                <tbody th:remove="all-but-first">
+                    <tr th:each="author:${page.content}">
+                        <td th:text="${author.firstName}">User</td>
+                        <td th:text="${author.lastName}">Anonymus</td>
+                    </tr>
+                    <tr>
+                        <td>No</td>
+                        <td>One</td>
+                    </tr>
+                    <tr>
+                        <td>Agatha</td>
+                        <td>Zdywyzic</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

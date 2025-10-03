@@ -5,6 +5,8 @@ import dev.dragonstb.looksforbooks.repositories.AuthorRepository;
 import java.util.List;
 import org.neo4j.cypherdsl.core.Statement;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,8 +24,8 @@ public class RestApiController {
     private AuthorRepository authorRepository;
 
     @GetMapping("/authors")
-    public List<AuthorProjection> getAllAuthors() {
-        List<AuthorProjection> authors = authorRepository.getAllNamesOnly();
+    public Page<AuthorProjection> getAllAuthors(Pageable pageable) {
+        Page<AuthorProjection> authors = authorRepository.getAllNamesOnly(pageable);
         return authors;
     }
 
