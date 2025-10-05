@@ -5,3 +5,19 @@
 .labeloverview {
     width: 10%;
 }
+
+.tablecolumn {
+    width: 80%;
+}
+
+.entryoverview {
+    width: 10%;
+}
+
+.tablecontentrow {
+
+}
+
+.hidden {
+    display: none;
+}

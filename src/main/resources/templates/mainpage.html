@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Looks for Books</title>
     <link rel="stylesheet" href="../static/css/general.css" th:href="@{/css/general.css}"/>
+    <script src="../static/scripts/globals.js" th:src="@{/scripts/globals.js}"></script>
+    <script src="../static/scripts/author.js" th:src="@{/scripts/author.js}"></script>
     <script src="../static/scripts/main.js" th:src="@{/scripts/main.js}"></script>
 </head>
 <body>
     <div class="mainframe">
         <div class="labeloverview">
             <div>
-                <button id="authors-btn">Author</button>
-                <div>Book</div>
-                <div>Variant</div>
-                <div>Library</div>
-                <div>Language</div>
+                <h3>List types</h3>
+                <button id="authors-btn">Authors</button>
+                <div>Books</div>
+                <div>Variants</div>
+                <div>Librarys</div>
+                <div>Languages</div>
             </div>
             <hr />
             <div>
@@ -29,12 +32,25 @@
                 <button id="authors-api-btn">Author API</button>
             </div>
         </div>
-        <div id="tableAnchor">
+        <div id="tableAnchor" class="tablecolumn">
             <div>a</div>
             <div>b</div>
             <div>c</div>
             <div>d</div>
             <div>e</div>
+        </div>
+        <div class="entryoverview">
+            <div id="authorWorkspace">
+                <form id="edit-author-form">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" name="firstName" required="" minlength="1" maxlength="128" value="John" />
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" name="lastName" value="Doe" />
+                    <label for="lastName">Last Name:</label>
+                    <input type="hidden" id="id" name="id" value="123" />
+                    <button id="submit-author-edition-btn" type="button" form="edit-author-form">Submit edition</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>

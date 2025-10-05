@@ -30,8 +30,10 @@ public class RestApiControllerTest {
 
     private static final String AUTHOR_1_FIRSTNAME = "John";
     private static final String AUTHOR_1_LASTNAME = "One";
+    private static final String AUTHOR_1_AID = "abc123";
     private static final String AUTHOR_2_FIRSTNAME = "Jane";
     private static final String AUTHOR_2_LASTNAME = "Two";
+    private static final String AUTHOR_2_AID = "abc456";
 
     @MockitoBean
     private AuthorRepository repo;
@@ -61,8 +63,8 @@ public class RestApiControllerTest {
 
     @BeforeEach
     public void setUp() {
-        author1 = new MockAuthorProjection(AUTHOR_1_FIRSTNAME, AUTHOR_1_LASTNAME);
-        author2 = new MockAuthorProjection(AUTHOR_2_FIRSTNAME, AUTHOR_2_LASTNAME);
+        author1 = new MockAuthorProjection(AUTHOR_1_FIRSTNAME, AUTHOR_1_LASTNAME, AUTHOR_1_AID);
+        author2 = new MockAuthorProjection(AUTHOR_2_FIRSTNAME, AUTHOR_2_LASTNAME, AUTHOR_2_AID);
         authors = new ArrayList<>();
         authors.add(author1);
         authors.add(author2);
@@ -74,6 +76,7 @@ public class RestApiControllerTest {
 
     @Test
     public void testGetAllAuthors() throws Exception {
+        // TODO: update test, as return has been changed from List<AuthorProjection> to Page<AuthorProjection>
         String expected = objectMapper.writeValueAsString(authors);
         when( repo.getAllNamesOnly() ).thenReturn(authors);
         RequestBuilder request = get("/rest/authors").contentType(MediaType.APPLICATION_JSON);
@@ -104,10 +107,12 @@ public class RestApiControllerTest {
     class MockAuthorProjection implements AuthorProjection {
         private final String firstName;
         private final String lastName;
+        private final String aid;
 
-        public MockAuthorProjection(String firstName, String lastName) {
+        public MockAuthorProjection(String firstName, String lastName, String aid) {
             this.firstName = firstName;
             this.lastName = lastName;
+            this.aid = aid;
         }
 
         @Override
@@ -118,6 +123,11 @@ public class RestApiControllerTest {
         @Override
         public String getLastName() {
             return lastName;
+        }
+
+        @Override
+        public String getAid() {
+            return aid;
         }
 
     }

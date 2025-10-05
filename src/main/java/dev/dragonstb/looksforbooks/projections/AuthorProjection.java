@@ -9,4 +9,6 @@ public interface AuthorProjection {
 
     public String getFirstName();
     public String getLastName();
+    public String getAid();
+    
 }

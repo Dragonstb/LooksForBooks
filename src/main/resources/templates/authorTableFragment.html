@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
     <head>
+        <title th:remove="all">Author Table Fragment</title>
         <link rel="stylesheet" href="../static/css/general.css" th:href="@{/css/general.css}"/>
     </head>
     <body>
@@ -14,17 +15,20 @@
                     </tr>
                 </thead>
                 <tbody th:remove="all-but-first">
-                    <tr th:each="author:${page.content}">
-                        <td th:text="${author.firstName}">User</td>
-                        <td th:text="${author.lastName}">Anonymus</td>
+                    <tr th:each="author:${page.content}" class="tablecontentrow">
+                        <td th:text="${author.firstName}" x-type="firstName">User</td>
+                        <td th:text="${author.lastName}" x-type="lastName">Anonymus</td>
+                        <td th:text="${author.aid}" class="hidden" x-type="id">123</td>
                     </tr>
-                    <tr>
-                        <td>No</td>
-                        <td>One</td>
+                    <tr class="tablecontentrow">
+                        <td x-type="firstName">No</td>
+                        <td x-type="lastName">One</td>
+                        <td class="hidden" x-type="id">123</td>
                     </tr>
-                    <tr>
-                        <td>Agatha</td>
-                        <td>Zdywyzic</td>
+                    <tr class="tablecontentrow">
+                        <td x-type="firstName">Agatha</td>
+                        <td x-type="lastName">Zdywyzic</td>
+                        <td class="hidden" x-type="id">123</td>
                     </tr>
                 </tbody>
             </table>

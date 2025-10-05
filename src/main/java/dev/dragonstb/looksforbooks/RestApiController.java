@@ -1,5 +1,6 @@
 package dev.dragonstb.looksforbooks;
 
+import dev.dragonstb.looksforbooks.entities.AuthorEntity;
 import dev.dragonstb.looksforbooks.projections.AuthorProjection;
 import dev.dragonstb.looksforbooks.repositories.AuthorRepository;
 import java.util.List;
@@ -8,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,6 +39,21 @@ public class RestApiController {
         List<AuthorProjection> authors = authorRepository.findAll( statement, AuthorProjection.class )
                 .stream().toList();
         return authors;
+    }
+
+    @PostMapping("/authors/{id}")
+    public String postAuthor(@PathVariable String id, @RequestBody AuthorEntity author) {
+        // TODO: input validation
+        // TODO: proper error handling
+        // TODO: path variable 'id' is not used, as author's aid is sent with the request body
+        String msg = "ok :)";
+        try {
+            authorRepository.save(author);
+        } catch (Exception e) {
+            msg = e.getMessage();
+        }
+
+        return msg;
     }
 
 }

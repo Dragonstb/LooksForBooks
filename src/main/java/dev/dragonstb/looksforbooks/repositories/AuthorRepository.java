@@ -23,8 +23,8 @@ public interface AuthorRepository extends Neo4jRepository<AuthorEntity, String>,
     @Query("MATCH (a:Author) RETURN a.firstName AS firstName, a.lastName AS lastName")
     List<AuthorProjection> getAllNamesOnly();
 
-    @Query(value = "MATCH (a:Author) RETURN a.firstName AS firstName, a.lastName AS lastName"
-            + " ORDER BY lastName, firstName ASC SKIP $skip LIMIT $limit",
+    @Query(value = "MATCH (a:Author) RETURN a.firstName AS firstName, a.lastName AS lastName, a.aid AS aid"
+            + " ORDER BY lastName, firstName, aid ASC SKIP $skip LIMIT $limit",
             countQuery = "MATCH (a:Author) RETURN count(a)")
     Page<AuthorProjection> getAllNamesOnly(Pageable pageable);
 }
